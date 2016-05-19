@@ -20,28 +20,10 @@ class SMSController extends Controller
         return '<>%^&<>';
     }
 
-    private function encry($concat){
-        $dynamicKey = substr($concat,0,5).date('dDznYGH').substr($concat,-5,5);
-        Config::set('app.key',$dynamicKey);
-        $enc1 = Crypt::encrypt($concat);
-        Config::set('app.key',$this->getSuperKey());
-        $enc2 = Crypt::encrypt($dynamicKey);
-
-        // send to server
-        return $this->server_decrypt($enc1,$enc2);
-    }
-
-    public function index(){
-        $KTP = Input::get('KTP');
-        $telp = Input::get('telp');
-        if($this->encry($KTP.$this->getSeparator().$telp) == ''){
-            return redirect()->back();
-        } else {
-            return redirect('token');
-        }
-    }
-
-    public function server_decrypt($enc1,$enc2){
+    public function server_decrypt(){
+        $enc1 = Input::get('enc1');
+        $enc2 = Input::get('enc2');
+//        dd(Input::all());
         Config::set('app.key',$this->getSuperKey());
         $dynamicKey = Crypt::decrypt($enc2);
         Config::set('app.key',$dynamicKey);
@@ -70,7 +52,4 @@ class SMSController extends Controller
         return $token;
     }
 
-    public function haloo(){
-        return 'Hallo';
-    }
 }

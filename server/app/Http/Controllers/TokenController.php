@@ -16,26 +16,9 @@ class TokenController extends Controller
         return 'thereisnothingicando';
     }
 
-    private function encry($token){
-        $dynamicKey = 'xxxxx'.date('dDznYGH').'xxxxx';
-        Config::set('app.key',$dynamicKey);
-        $enc1 = Crypt::encrypt($token);
-        Config::set('app.key',$this->getSuperKey());
-        $enc2 = Crypt::encrypt($dynamicKey);
-        // send to server
-        return $this->server_decrypt($enc1,$enc2);
-    }
-
-    public function index(){
-        $token = Input::get('token');
-        if($this->encry($token) == 'Gagal'){
-            return redirect()->back();
-        } else {
-            return redirect('pilih');
-        }
-    }
-
-    public function server_decrypt($enc1,$enc2){
+    public function server_decrypt(){
+        $enc1 = Input::get('enc1');
+        $enc2 = Input::get('enc2');
         Config::set('app.key',$this->getSuperKey());
         $dynamicKey = Crypt::decrypt($enc2);
         Config::set('app.key',$dynamicKey);

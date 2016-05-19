@@ -22,8 +22,36 @@ class TokenController extends Controller
         $enc1 = Crypt::encrypt($token);
         Config::set('app.key',$this->getSuperKey());
         $enc2 = Crypt::encrypt($dynamicKey);
+
         // send to server
-        return $this->server_decrypt($enc1,$enc2);
+        $post_data['enc1'] = $enc1;
+        $post_data['enc2'] = $enc2;
+
+        foreach ( $post_data as $key => $value) {
+            $post_items[] = $key . '=' . $value;
+        }
+
+        $post_string = implode ('&', $post_items);
+
+//        $post_string = '?' . $post_string;
+
+        $data_length = strlen($post_string);
+
+        $connection = fsockopen('127.0.0.1', 80);
+
+        fputs($connection, "POST  /super-vote/server/public/checktoken  HTTP/1.1\r\n");
+        fputs($connection, "Host:  www.domainname.com \r\n");
+        fputs($connection,
+            "Content-Type: application/x-www-form-urlencoded\r\n");
+        fputs($connection, "Content-Length: $data_length\r\n");
+        fputs($connection, "Connection: close\r\n\r\n");
+        fputs($connection, $post_string);
+
+        while($lala = fgets($connection)){
+            $lili = $lala;
+        }
+        fclose($connection);
+        return $lili;
     }
 
     public function index(){
@@ -35,30 +63,4 @@ class TokenController extends Controller
         }
     }
 
-    public function server_decrypt($enc1,$enc2){
-        Config::set('app.key',$this->getSuperKey());
-        $dynamicKey = Crypt::decrypt($enc2);
-        Config::set('app.key',$dynamicKey);
-        $token = Crypt::decrypt($enc1);
-        $status = 'Gagal';
-        $voter = Voter::where('token',$token)->first();
-        if($voter){
-//            dd($voter->token_exp);
-            $date = $voter->token_exp;
-            $currentDate = strtotime($date);
-            if($currentDate > strtotime(date("Y-m-d H:i:s"))){
-                $ip = Request::ip();
-                $voter->session_ip = $ip;
-                    $date = date("Y-m-d H:i:s");
-                    $currentDate = strtotime($date);
-                    $futureDate = $currentDate+(60*5);
-                    $formatDate = date("Y-m-d H:i:s", $futureDate);
-                $voter->session_exp = $formatDate;
-                $voter->save();
-                $status = 'Sukses';
-            }
-        }
-
-        return $status;
-    }
 }
