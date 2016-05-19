@@ -40,16 +40,7 @@
             <div class="content">
                 <div class="title">E-Vote</div>
                 <br>
-                <br>
-                <br>
-                <form method="POST" action="{{URL::to('sendsms')}}">
-                    <h3>KTP :</h3>
-                    <input type="number" name="KTP"><br>
-                    <h3>No. HP :</h3>
-                    <input type="number" name="telp"><br><br><br>
-                    <input type="submit">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                </form>
+                <h1 style="color: black">Ini Halaman Utama Memilih Jika Autentikasi Berhasil</h1>
             </div>
         </div>
     </body>

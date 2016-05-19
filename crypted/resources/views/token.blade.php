@@ -42,14 +42,14 @@
                 <br>
                 <br>
                 <br>
-                <form method="POST" action="{{URL::to('sendsms')}}">
-                    <h3>KTP :</h3>
-                    <input type="number" name="KTP"><br>
-                    <h3>No. HP :</h3>
-                    <input type="number" name="telp"><br><br><br>
+                <form method="POST" action="{{URL::to('checktoken')}}">
+                    <h3>TOKEN :</h3>
+                    <input type="text" name="token"><br><br><br>
                     <input type="submit">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 </form>
+                <br>
+                <a href="{{URL::to('/')}}"><h2 style="color: black">Tidak Menerima SMS? Kirim Ulang SMS</h2></a>
             </div>
         </div>
     </body>

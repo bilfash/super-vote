@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Laravel</title>
+        <title>Be right back.</title>
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
@@ -14,6 +14,7 @@
                 margin: 0;
                 padding: 0;
                 width: 100%;
+                color: #B0BEC5;
                 display: table;
                 font-weight: 100;
                 font-family: 'Lato';
@@ -31,25 +32,15 @@
             }
 
             .title {
-                font-size: 96px;
+                font-size: 72px;
+                margin-bottom: 40px;
             }
         </style>
     </head>
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">E-Vote</div>
-                <br>
-                <br>
-                <br>
-                <form method="POST" action="{{URL::to('sendsms')}}">
-                    <h3>KTP :</h3>
-                    <input type="number" name="KTP"><br>
-                    <h3>No. HP :</h3>
-                    <input type="number" name="telp"><br><br><br>
-                    <input type="submit">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                </form>
+                <div class="title">Be right back.</div>
             </div>
         </div>
     </body>
