@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Crypt;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
 
 use App\Voter;
 
@@ -37,11 +38,9 @@ class SMSController extends Controller
 
         $post_string = implode ('&', $post_items);
 
-//        $post_string = '?' . $post_string;
-
         $data_length = strlen($post_string);
 
-        $connection = fsockopen('127.0.0.1', 80);
+        $connection = fsockopen('localhost', 80);
 
         fputs($connection, "POST  /super-vote/server/public/sendsms  HTTP/1.1\r\n");
         fputs($connection, "Host:  www.domainname.com \r\n");
@@ -61,11 +60,15 @@ class SMSController extends Controller
     public function index(){
         $KTP = Input::get('KTP');
         $telp = Input::get('telp');
-        if(strlen($this->encry($KTP.$this->getSeparator().$telp)) == 2){
+        $conn = $this->encry($KTP.$this->getSeparator().$telp);
+//        dd(strlen($conn));
+        if(strlen($conn) == 2){
+            Session::flash('notif', 'User Tidak Ditemukan');
             return redirect()->back();
         } else {
             return redirect('token');
         }
     }
+
 
 }

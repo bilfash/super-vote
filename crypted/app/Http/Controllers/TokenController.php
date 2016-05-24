@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Crypt;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
 
 use App\Voter;
 
@@ -37,7 +38,7 @@ class TokenController extends Controller
 
         $data_length = strlen($post_string);
 
-        $connection = fsockopen('127.0.0.1', 80);
+        $connection = fsockopen('localhost', 80);
 
         fputs($connection, "POST  /super-vote/server/public/checktoken  HTTP/1.1\r\n");
         fputs($connection, "Host:  www.domainname.com \r\n");
@@ -56,9 +57,12 @@ class TokenController extends Controller
 
     public function index(){
         $token = Input::get('token');
-        if($this->encry($token) == 'Gagal'){
+        $conn = $this->encry($token);
+        if($conn == 'Gagal'){
+            Session::flash('notif', 'User Tidak Ditemukan');
             return redirect()->back();
         } else {
+            Session::put('avafiore',$conn);
             return redirect('pilih');
         }
     }

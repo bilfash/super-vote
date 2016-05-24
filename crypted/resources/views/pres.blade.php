@@ -62,34 +62,25 @@
 </head>
 <body>
 <div class="name-hero">
-    KIJ
+    E-VOTE
 </div>
-<div class="login">
-    <div class="login-header">
-        E-VOTE
-    </div>
+<div class="login" style="width: 700px;">
     <div class="login-form">
-        <!-- <form action="#">
-            <div class="form-group">
-                <input type="text" class="form-control" id="nama" placeholder="Nama Lengkap">
+        <!-- <div class="form-group"> -->
+        <form>
+            <div class="login-header">
+                PRESIDEN
             </div>
-            <div class="form-group">
-                <input type="text" class="form-control" id="no.hp" placeholder="Nomor Telepone">
+            <div class="dd-selector">
+                <input id="pres1" type="radio" name="credit-card" value="lala1" />
+                <label class="drinkcard-p pres1" for="pres1"></label>
+                <input id="pres2" type="radio" name="credit-card" value="2" />
+                <label class="drinkcard-p pres2"for="pres2"></label>
             </div>
-            <div class="form-group">
-                <input type="text" class="form-control" id="ktp" placeholder="No KTP">
-            </div> -->
-        <!--<div class="form-group">
-            <input type="text" class="form-control" id="tempatlahir" placeholder="Tempat Lahir">
-        </div>
-        <div class="form-group">
-            <input type="date" class="form-control" id="tanggallahir" placeholder="Tanggal Lahir">
-        </div> -->
-        <!-- <a href="index.php" class="btn btn-info" role="button" style="width: 130px;height: 35px;">Login</a>
-        <button type="submit" class="btn btn-login">Daftar</button>
-    </form> -->
-        <a href="{{URL::to('dpr')}}" class="btn btn-info" role="button" style="width: 130px;height: 35px;">Pilih DPR</a>
-        <a href="{{URL::to('pres')}}" class="btn btn-info" role="button" style="width: 130px;height: 35px;">Pilih Presiden</a>
+        </form>
+        <br><br><br>
+        <a href="{{URL::to('pilih')}}" class="btn btn-warning" role="button" style="width: 130px;height: 35px;">Kembali</a>
+        <a href="#" class="btn btn-info" role="button" style="width: 130px;height: 35px;">Submit</a>
     </div>
 </div>
 </body>

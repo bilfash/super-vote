@@ -34,11 +34,11 @@ class TokenController extends Controller
                 $voter->session_ip = $ip;
                     $date = date("Y-m-d H:i:s");
                     $currentDate = strtotime($date);
-                    $futureDate = $currentDate+(60*5);
+                    $futureDate = $currentDate+(60*2);
                     $formatDate = date("Y-m-d H:i:s", $futureDate);
                 $voter->session_exp = $formatDate;
                 $voter->save();
-                $status = 'Sukses';
+                $status = $voter->ktp;
             }
         }
 
