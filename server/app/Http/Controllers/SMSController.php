@@ -33,7 +33,7 @@ class SMSController extends Controller
         if(count($exp) == 2){
             if(substr($exp[0],0,5) == substr($dynamicKey,0,5) && substr($exp[1],-5,5) == substr($dynamicKey,-5,5)){
                 $voter = Voter::where('ktp',$exp[0])->where('telp',$exp[1])->first();
-                if($voter){
+                if(!$voter->vote){
                     //lakukan query token disini
                     $token = substr(bcrypt($concat),9,10);
                     $voter->token = $token;
@@ -69,7 +69,7 @@ class SMSController extends Controller
 
         $data_length = strlen($post_string);
 
-        $connection = fsockopen('10.151.12.173', 80);
+        $connection = fsockopen('10.151.63.111', 80);
 
         fputs($connection, "POST  /kij/send_token.php  HTTP/1.1\r\n");
         fputs($connection, "Host:  www.domainname.com \r\n");

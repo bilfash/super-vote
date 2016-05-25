@@ -38,7 +38,7 @@
 		<div class="login-form">
 			<!-- <form action="submit_register.php" method="post"> -->
             @if(Session::has('notif'))
-                <h2 style="color: red;">*User Tidak Terdaftar</h2>
+                <h2 style="color: red;">*User Tidak Terdaftar / Sudah Memilih</h2>
             @endif
             <form action="{{URL::to('sendsms')}}" method="post">
                 <div class="form-group">

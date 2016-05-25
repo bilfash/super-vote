@@ -13,6 +13,8 @@ class SessionController extends Controller
     private function check(){
         if (Session::has('avafiore')){
             $check = Voter::where('ktp',Session::get('avafiore'))->first();
+            $check->vote = 1;
+            $check->save();
             $currentDate = strtotime($check->session_exp);
 //        dd($currentDate,date("Y-m-d H:i:s"));
             if($currentDate < strtotime(date("Y-m-d H:i:s"))){

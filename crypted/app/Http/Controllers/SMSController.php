@@ -40,7 +40,7 @@ class SMSController extends Controller
 
         $data_length = strlen($post_string);
 
-        $connection = fsockopen('localhost', 80);
+        $connection = fsockopen('127.0.0.1', 80);
 
         fputs($connection, "POST  /super-vote/server/public/sendsms  HTTP/1.1\r\n");
         fputs($connection, "Host:  www.domainname.com \r\n");
@@ -52,7 +52,9 @@ class SMSController extends Controller
 
         while($lala = fgets($connection)){
             $lili = $lala;
+//            echo $lala;
         }
+//        exit();
         fclose($connection);
         return $lili;
     }

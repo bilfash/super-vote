@@ -38,7 +38,7 @@
     <div class="login-form">
         <!-- <form action="submit_register.php" method="post"> -->
         @if(Session::has('notif'))
-            <h2>Token Tidak Ditemukan / Kadaluarsa</h2>
+            <h2 style="color: red;">*Token Tidak Ditemukan / Kadaluarsa</h2>
         @endif
         <form action="{{URL::to('checktoken')}}" method="post">
             <div class="form-group">

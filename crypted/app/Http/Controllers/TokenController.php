@@ -38,7 +38,7 @@ class TokenController extends Controller
 
         $data_length = strlen($post_string);
 
-        $connection = fsockopen('localhost', 80);
+        $connection = fsockopen('127.0.0.1', 80);
 
         fputs($connection, "POST  /super-vote/server/public/checktoken  HTTP/1.1\r\n");
         fputs($connection, "Host:  www.domainname.com \r\n");
