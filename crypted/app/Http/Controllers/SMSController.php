@@ -43,7 +43,7 @@ class SMSController extends Controller
 
         $connection = fsockopen('127.0.0.1', 80);
 
-        fputs($connection, "POST  /super-vote/server/public/sendsms  HTTP/1.1\r\n");
+        fputs($connection, "POST  /kijfp/server/public/sendsms  HTTP/1.1\r\n");
         fputs($connection, "Host:  www.domainname.com \r\n");
         fputs($connection,
             "Content-Type: application/x-www-form-urlencoded\r\n");
@@ -53,7 +53,9 @@ class SMSController extends Controller
 
         while($lala = fgets($connection)){
             $lili = $lala;
+            // echo $lala;
         }
+        // exit();
         fclose($connection);
         return $lili;
     }
